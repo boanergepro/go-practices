@@ -55,8 +55,12 @@ func main () {
 		contexto.Redirect("/usuarios")
 	})
 	app.Get("/usuarios", func(contexto context.Context) {
-
-		contexto.JSON(usuarios)
+		if len(usuarios) < 1 {
+			contexto.HTML("<h3>No hay personas en la base de datos.</h3>")
+		} else {
+			contexto.JSON(usuarios)
+		}
+		
 	})
 
 	
