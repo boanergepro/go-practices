@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- Compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+          
+	<title>Document</title>
+</head>
+<body>
+	
+	<div class="row">
+
+		<h5 class="center">Registro de usuario</h5>
+
+		<div class="col m3 l4"></div>
+
+		<div class="col m7 l4 center">
+			
+			<div class="row">
+				
+				
+				<form method="post" action="/registrar" class="col s12 form">
+			
+		      		<div class="row">
+		      			<div class="input-field col s12">
+				          	<input id="usuario" type="text" name="usuario" class="validate">
+				          	<label for="usuario">Usuario</label>
+				        </div>
+		      		</div>
+		        
+					<div class="row">
+						
+						<div class="input-field col s12">
+		        
+		          			<input id="password" type="password" name="password" class="validate">
+		          			<label for="password">Password</label>
+		        		</div>
+					</div>
+		        	
+		        	<div class="row">
+
+		        		<div class="input-field col s12">
+
+						    <select name="permisos">
+						    	<option value="user">Usuario</option>
+						    	<option value="admin">Administrador</option>
+						    </select>
+						    <label>Seleccione el permiso</label>
+						
+						 </div>
+
+
+
+		        	<div class="row">
+		        		<div class="input-field col s12">
+			          		<input id="email" type="email" name="email" class="validate">
+			          		<label for="email">Email</label>
+		        		</div>
+		        	</div>
+		        
+
+		        	<div class="row">
+		        		  <button class="btn red waves-effect waves-light col s12" type="submit" name="action">Registrarme</button>
+		        	</div>
+		      		
+	        	
+
+	      		
+	    		</form>
+
+			</div>
+
+
+		</div>
+		
+		<div class="col m3 l4"></div>
+
+	</div>
+	<script>
+		 $(document).ready(function() {
+    		$('select').material_select();
+  		});
+	</script>
+</body>
+</html>
