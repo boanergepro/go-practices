@@ -22,7 +22,7 @@ func main() {
 
 
 	//Connect(host, user, password string, log bool) (*Session, error) {
-    session,err := arango.Connect("http://192.168.0.106:8529","root","canaima",false) 
+    session,err := arango.Connect("http://192.168.0.106:8529","username","password",false) 
     if err != nil{
         panic(err)
     }
