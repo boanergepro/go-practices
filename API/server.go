@@ -22,16 +22,16 @@ func main() {
 
 
 	//Connect(host, user, password string, log bool) (*Session, error) {
-    session,err := arango.Connect("http://192.168.0.106:8529","username","password",false) 
+    session,err := arango.Connect("http://192.168.0.100:8529","boanergepro","123456",false) 
     if err != nil{
         panic(err)
     }
 
     //Creando una colleccion si no existe
-    if !session.DB("boanerge").ColExist("usuarios") {
+    if !session.DB("boanergepro").ColExist("usuarios") {
 
     	documento := arango.NewCollectionOptions("usuarios", true)
-    	session.DB("boanerge").CreateCollection(documento)
+    	session.DB("boanergepro").CreateCollection(documento)
 
     }
     //CREAR
@@ -48,7 +48,7 @@ func main() {
     	user.Email = email
 
     	//Insertar documtnto
-    	err = session.DB("boanerge").Col("usuarios").Save(&user)
+    	err = session.DB("boanergepro").Col("usuarios").Save(&user)
     	if err != nil {
     		contexto.StatusCode(iris.StatusInternalServerError)
     	}
@@ -64,7 +64,7 @@ func main() {
 			RETURN usuario
 		`) 
 
-		cursor, err := session.DB("boanerge").Execute(query)
+		cursor, err := session.DB("boanergepro").Execute(query)
 		if  err != nil {
     		contexto.StatusCode(iris.StatusInternalServerError)
     	}
@@ -91,7 +91,7 @@ func main() {
 			"key": key_params,
 		}
 
-		cursor, err := session.DB("boanerge").Execute(query)
+		cursor, err := session.DB("boanergepro").Execute(query)
 		if  err != nil {
 			contexto.StatusCode(iris.StatusInternalServerError)
     	}
@@ -118,7 +118,7 @@ func main() {
 			"key": key_params,
 		}
 
-		cursor, err := session.DB("boanerge").Execute(query)
+		cursor, err := session.DB("boanergepro").Execute(query)
 
 	    if err != nil {
 	    	contexto.StatusCode(iris.StatusInternalServerError)
@@ -138,7 +138,7 @@ func main() {
     		user_actualiar.Email = contexto.PostValue("email")
     	}
 
-    	err = session.DB("boanerge").Col("usuarios").Replace(user_actualiar.Key, user_actualiar)
+    	err = session.DB("boanergepro").Col("usuarios").Replace(user_actualiar.Key, user_actualiar)
     	if err != nil {
     		contexto.StatusCode(iris.StatusInternalServerError)
     	}
@@ -151,7 +151,7 @@ func main() {
 
 		key_params := contexto.Params().Get("key")
 
-		err = session.DB("boanerge").Col("usuarios").Delete(key_params)
+		err = session.DB("boanergepro").Col("usuarios").Delete(key_params)
 
 	    if err != nil {
 	    	contexto.StatusCode(iris.StatusInternalServerError)
