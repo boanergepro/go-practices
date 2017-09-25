@@ -19,8 +19,6 @@ func main() {
 
 	app := iris.New()
 	
-
-
 	//Connect(host, user, password string, log bool) (*Session, error) {
     session,err := arango.Connect("http://192.168.0.100:8529","boanergepro","123456",false) 
     if err != nil{
