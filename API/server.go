@@ -73,9 +73,8 @@ func main() {
     	contexto.StatusCode(iris.StatusOK)
 		contexto.JSON(resultados)
 		
-		
 	})
-	//VER UNO
+	//VER
 	app.Get("/usuarios/{key:string}", func(contexto context.Context) {
 		
 		key_params := contexto.Params().Get("key")
@@ -101,7 +100,7 @@ func main() {
 		contexto.JSON(resultado)
 		
 	})
-	//ACTUALIZAR UNO
+	//ACTUALIZAR
 	
 	app.Put("/usuarios/{key:string}", func(contexto context.Context) {
 
@@ -144,7 +143,7 @@ func main() {
     	contexto.StatusCode(iris.StatusOK)
 	})
 	
-	//ELIMINAR UN DOCUMENTO
+	//ELIMINAR
 	app.Delete("/usuarios/{key:string}", func(contexto context.Context) {
 
 		key_params := contexto.Params().Get("key")
@@ -159,6 +158,6 @@ func main() {
 
 	})
 
-    // Start the server using a network address.
+    //Servidor corriendo en http://localhost:8080
     app.Run(iris.Addr(":8080"))
 }
