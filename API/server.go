@@ -42,7 +42,7 @@ func main() {
     	session.DB("boanergepro").CreateCollection(documento)
 
     }
-    
+
     //CREAR
 	app.Post("/usuarios", func (contexto context.Context) {
 		var user Usuario
@@ -77,6 +77,7 @@ func main() {
 		contexto.JSON(resultados)
 		
 	})
+
 	//VER
 	app.Get("/usuarios/{key:string}", func(contexto context.Context) {
 		
@@ -103,8 +104,8 @@ func main() {
 		contexto.JSON(resultado)
 		
 	})
-	//ACTUALIZAR
 	
+	//ACTUALIZAR
 	app.Put("/usuarios/{key:string}", func(contexto context.Context) {
 
 		key_params := contexto.Params().Get("key")
