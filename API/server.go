@@ -10,10 +10,10 @@ import (
 )
 
 type Usuario struct {
-  arango.Document //Hay que incluirlo siempre en todas las estructuras porque añade campos nativos de arango
-  Usuario     string `json:"usuario"`
-  Password    string `json:"password"`
-  Email 	  string `json:"email"`
+	arango.Document //Hay que incluirlo siempre en todas las estructuras porque añade campos nativos de arango
+	Usuario     string `json:"usuario"`
+	Password    string `json:"password"`
+	Email 	  string `json:"email"`
 }
 
 func main() {
