@@ -5,6 +5,7 @@ import (
 	arango "github.com/diegogub/aranGO"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
+	"github.com/iris-contrib/middleware/cors"
 
 )
 
@@ -18,6 +19,15 @@ type Usuario struct {
 func main() {
 
 	app := iris.New()
+
+	//Manejar la comunicacion del API
+	app.WrapRouter(cors.WrapNext(cors.Options{
+			AllowedOrigins:   []string{"*"},
+			AllowedMethods:   []string{"OPTIONS", "GET", "POST", "PUT", "DELETE"},
+			AllowedHeaders:   []string{"*"},
+			AllowCredentials: true,
+			Debug:            true,
+		}))
 	
 	//Connect(host, user, password string, log bool) (*Session, error) {
     session,err := arango.Connect("http://192.168.0.100:8529","boanergepro","123456",false) 
@@ -32,20 +42,13 @@ func main() {
     	session.DB("boanergepro").CreateCollection(documento)
 
     }
+    
     //CREAR
 	app.Post("/usuarios", func (contexto context.Context) {
-
-		usuario := contexto.PostValue("usuario")
-		password := contexto.PostValue("password")
-		email := contexto.PostValue("email")
-
 		var user Usuario
+		contexto.ReadJSON(&user)
 
-		user.Usuario = usuario
-    	user.Password = password
-    	user.Email = email
-
-    	//Insertar documtnto
+    	//Insertar documento
     	err = session.DB("boanergepro").Col("usuarios").Save(&user)
     	if err != nil {
     		contexto.StatusCode(iris.StatusInternalServerError)
