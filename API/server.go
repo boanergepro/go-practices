@@ -44,7 +44,7 @@ func main() {
     }
 
     //CREAR
-	app.Post("/usuarios", func (contexto context.Context) {
+	app.Post("/api/usuarios", func (contexto context.Context) {
 		var user Usuario
 		contexto.ReadJSON(&user)
 
@@ -58,7 +58,7 @@ func main() {
 	})
 
 	//VER TODOS
-	app.Get("/usuarios", func(contexto context.Context) {
+	app.Get("/api/usuarios", func(contexto context.Context) {
 		
 		query := arango.NewQuery(` 
 			FOR usuario in usuarios
@@ -79,7 +79,7 @@ func main() {
 	})
 
 	//VER
-	app.Get("/usuarios/{key:string}", func(contexto context.Context) {
+	app.Get("/api/usuarios/{key:string}", func(contexto context.Context) {
 		
 		key_params := contexto.Params().Get("key")
 
@@ -106,7 +106,7 @@ func main() {
 	})
 	
 	//ACTUALIZAR
-	app.Put("/usuarios/{key:string}", func(contexto context.Context) {
+	app.Put("/api/usuarios/{key:string}", func(contexto context.Context) {
 
 		key_params := contexto.Params().Get("key")
 
@@ -148,7 +148,7 @@ func main() {
 	})
 	
 	//ELIMINAR
-	app.Delete("/usuarios/{key:string}", func(contexto context.Context) {
+	app.Delete("/api/usuarios/{key:string}", func(contexto context.Context) {
 
 		key_params := contexto.Params().Get("key")
 
