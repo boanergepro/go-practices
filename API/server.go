@@ -44,19 +44,8 @@ func main() {
     }
 
     //Index del API
-    app.Get("/api", func (contexto context.Context) {
-    	contexto.HTML(`
-    		<h1>Api corriendo</h1><br>
-    		<h4>Recursos:</h4><br>
-    		<ul>
-    			<li>
-    				<a href="http://localhost:8080/api/usuarios"> usuarios
-
-    			</li>
-    		</ul>
-    	`)
-    })
-
+    app.Get("/api", HandlerIndex)
+   
     //CREAR
 	app.Post("/api/usuarios", func (contexto context.Context) {
 		var user Usuario
@@ -178,4 +167,17 @@ func main() {
 
     //Servidor corriendo en http://localhost:8080
     app.Run(iris.Addr(":8080"))
+}
+
+func HandlerIndex (contexto context.Context) {
+	contexto.HTML(`
+		<h1>Api corriendo</h1><br>
+		<h4>Recursos:</h4><br>
+		<ul>
+			<li>
+				<a href="http://localhost:8080/api/usuarios"> usuarios
+
+			</li>
+		</ul>
+    `)
 }
