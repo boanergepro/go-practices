@@ -1,35 +1,21 @@
 package main
 
 import (
-
 	arango "github.com/diegogub/aranGO"
 	"github.com/kataras/iris"
-	"github.com/kataras/iris/context"
 	"github.com/iris-contrib/middleware/cors"
-
+	"./controladores"
+	"./db"
 )
-
-type Usuario struct {
-	arango.Document //Hay que incluirlo siempre en todas las estructuras porque añade campos nativos de arango
-	Usuario   string `json:"usuario"`
-	Password  string `json:"password"`
-	Email 	  string `json:"email"`
-}
-
-//Connect(host, user, password string, log bool) (*Session, error)
-var session, err = arango.Connect("http://192.168.0.100:8529","boanergepro","123456",false)
 
 func main() {
 
-	if err != nil{
-		panic(err)
-	}
 
 	//Creando una colleccion si no existe
-	if !session.DB("boanergepro").ColExist("usuarios") {
+	if !db.GetSessionDB().DB("boanergepro").ColExist("usuarios") {
 
 		documento := arango.NewCollectionOptions("usuarios", true)
-		session.DB("boanergepro").CreateCollection(documento)
+		db.GetSessionDB().DB("boanergepro").CreateCollection(documento)
 
 	}
 
@@ -45,11 +31,11 @@ func main() {
 	}))
 
     //Index del API
-    app.Get("/api", HandleIndex)
+    app.Get("/api", controladores.HandleIndex)
    
     //CREAR
-	app.Post("/api/usuarios", HandlerCreateUser)
-
+	app.Post("/api/usuarios", controladores.HandlerCreateUser)
+	/*
 	//VER
 	app.Get("/api/usuarios/{key:string}", HandlerUser)
 
@@ -61,37 +47,12 @@ func main() {
 	
 	//ELIMINAR
 	app.Delete("/api/usuarios/{key:string}",HandlerDeleteUser)
-
+	*/
     //Servidor corriendo en http://localhost:8080
     app.Run(iris.Addr(":8080"))
 }
 
-func HandleIndex (contexto context.Context) {
-	contexto.HTML(`
-		<h1>Api corriendo</h1><br>
-		<h4>Recursos:</h4><br>
-		<ul>
-			<li>
-				<a href="http://localhost:8080/api/usuarios"> usuarios
-
-			</li>
-		</ul>
-    `)
-}
-
-func HandlerCreateUser (contexto context.Context) {
-	var user Usuario
-	contexto.ReadJSON(&user)
-
-	//Insertar documento
-	err = session.DB("boanergepro").Col("usuarios").Save(&user)
-	if err != nil {
-		contexto.StatusCode(iris.StatusInternalServerError)
-	}
-
-	contexto.StatusCode(iris.StatusOK)
-}
-
+/*
 func HandlerAllUsers (contexto context.Context) {
 
 	query := arango.NewQuery(`
@@ -187,3 +148,4 @@ func HandlerDeleteUser (contexto context.Context) {
 
 	contexto.StatusCode(iris.StatusOK)
 }
+*/
