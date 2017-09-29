@@ -30,10 +30,10 @@ func main() {
 			Debug:            true,
 	}))
 
-    //Index del API
-    app.Get("/api", controladores.HandleIndex)
-   
-    //CREAR
+	//Index del API
+	app.Get("/api", controladores.HandleIndex)
+
+	//CREAR
 	app.Post("/api/usuarios", controladores.HandlerCreateUser)
 	
 	//VER
@@ -48,6 +48,6 @@ func main() {
 	//ELIMINAR
 	app.Delete("/api/usuarios/{key:string}", controladores.HandlerDeleteUser)
 
-    //Servidor corriendo en http://localhost:8080
-    app.Run(iris.Addr(":8080"))
+	//Servidor corriendo en http://localhost:8080
+	app.Run(iris.Addr(":8080"))
 }
