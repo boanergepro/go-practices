@@ -30,16 +30,8 @@ func HandlerUpdateUser (contexto context.Context) {
 	var user_actualiar modelos.Usuario
 
 	cursor.FetchOne(&user_actualiar)
-
-	if contexto.PostValue("usuario") != "" {
-		user_actualiar.Usuario = contexto.PostValue("usuario")
-	}
-	if contexto.PostValue("password") != "" {
-		user_actualiar.Password = contexto.PostValue("password")
-	}
-	if contexto.PostValue("email") != "" {
-		user_actualiar.Email = contexto.PostValue("email")
-	}
+	
+	contexto.ReadJSON(&user_actualiar)
 
 	err = db.GetSessionDB().DB("boanergepro").Col("usuarios").Replace(user_actualiar.Key, user_actualiar)
 	if err != nil {
