@@ -1,10 +1,6 @@
 package db
 
-import (
-	
-	arango "github.com/diegogub/aranGO"
-
-)
+import arango "github.com/diegogub/aranGO"
 
 func GetSessionDB() *arango.Session {
 
