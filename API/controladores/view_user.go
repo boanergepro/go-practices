@@ -6,7 +6,6 @@ import (
 	arango "github.com/diegogub/aranGO"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
-
 )
 
 func HandlerUser (contexto context.Context) {
