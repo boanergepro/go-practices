@@ -5,7 +5,7 @@ import arango "github.com/diegogub/aranGO"
 func GetSessionDB() *arango.Session {
 
 	//Connection ArangoDB
-	s, err := arango.Connect("http://192.168.0.100:8529","boanergepro", "123456", false)
+	s, err := arango.Connect("localhost:8529","root", "parangaturimicuaro", false)
 
 	if err != nil {
 		panic(err)
